@@ -1,65 +1,114 @@
-import Image from "next/image";
-
 export default function Home() {
+  const NavLink = ({ href, children, className }: any) => {
+    return <a href={href} className={className}>{children}</a>;
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="min-h-screen bg-gray-100 p-6">
+      {/* Header */}
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
+        <div>
+          <h1 className="text-4xl font-bold text-gray-800">
+            PayWage Dashboard
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-gray-500 mt-2">
+            A simple and clean management system for workers, attendance, and payroll.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        {/* Navigation Buttons */}
+        {/* <div className="flex gap-4 flex-wrap">
+          <NavLink
+            href="/workers"
+            className="bg-blue-900 hover:bg-blue-800 text-white px-5 py-3 rounded-xl shadow-md transition"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            Workers
+          </NavLink>
+
+          <NavLink
+            href="/attendances"
+            className="bg-green-600 hover:bg-green-500 text-white px-5 py-3 rounded-xl shadow-md transition"
           >
-            Documentation
-          </a>
+            Attendance
+          </NavLink>
+
+          <NavLink
+            href="/payrolls"
+            className="bg-yellow-500 hover:bg-yellow-400 text-white px-5 py-3 rounded-xl shadow-md transition"
+          >
+            Payroll
+          </NavLink>
+        </div> */}
+      </div>
+
+      {/* Hero Section */}
+      <div className="bg-gradient-to-r from-blue-900 to-blue-700 rounded-3xl p-8 text-white shadow-lg mb-8">
+        <h2 className="text-3xl font-bold mb-4">
+          Welcome to PayWage Management System
+        </h2>
+        <p className="text-lg text-blue-100">
+          Manage your complete workforce system in one place with simple navigation and clean structure.
+        </p>
+
+        <div className="flex flex-wrap gap-4 mt-6">
+          <NavLink
+            href="/workers"
+            className="bg-white text-blue-900 px-5 py-3 rounded-xl font-semibold hover:bg-gray-200 transition"
+          >
+            Go to Workers Module
+          </NavLink>
+
+          <NavLink
+            href="/attendances"
+            className="border border-white px-5 py-3 rounded-xl hover:bg-white hover:text-blue-900 transition"
+          >
+            Go to Attendance Module
+          </NavLink>
+
+          <NavLink
+            href="/payrolls"
+            className="bg-yellow-400 text-blue-900 px-5 py-3 rounded-xl font-semibold hover:bg-yellow-300 transition"
+          >
+            Go to Payroll Module
+          </NavLink>
         </div>
-      </main>
+      </div>
+
+      {/* Info Cards (STATIC CONTENT ONLY) */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+        <div className="bg-white rounded-2xl shadow-md p-6">
+          <h3 className="text-xl font-bold text-gray-800">Workers Management</h3>
+          <p className="text-gray-500 mt-2">
+            Add, view, and manage all employee records.
+          </p>
+        </div>
+
+        <div className="bg-white rounded-2xl shadow-md p-6">
+          <h3 className="text-xl font-bold text-gray-800">Attendance System</h3>
+          <p className="text-gray-500 mt-2">
+            Track daily attendance records easily.
+          </p>
+        </div>
+
+        <div className="bg-white rounded-2xl shadow-md p-6">
+          <h3 className="text-xl font-bold text-gray-800">Payroll System</h3>
+          <p className="text-gray-500 mt-2">
+            Manage salaries and payment records efficiently.
+          </p>
+        </div>
+      </div>
+
+      {/* Static Content Section */}
+      <div className="bg-white rounded-2xl shadow-md p-6">
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">
+          System Overview
+        </h2>
+        <p className="text-gray-600 leading-relaxed">
+          This PayWage system is designed to simplify workforce management. 
+          You can navigate to different modules using the buttons above. 
+          Each module handles a specific part of employee management including workers, attendance, and payroll processing.
+        </p>
+      </div>
     </div>
   );
 }
