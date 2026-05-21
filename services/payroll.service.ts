@@ -1,4 +1,3 @@
-import { serialize } from "v8";
 import api from "../config/axios";
 
 export const getPayrolls = async (page: number, limit: number, search: any) => {
@@ -7,10 +6,10 @@ export const getPayrolls = async (page: number, limit: number, search: any) => {
             page,
             limit
         }
-        if(search){
+        if (search) {
             params.search = search
         }
-        const response = await api.get(`/payroll`,{
+        const response = await api.get(`/payroll`, {
             params
         });
         return response.data;

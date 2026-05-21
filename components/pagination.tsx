@@ -15,10 +15,8 @@ export default function Pagination({
     limit,
     setLimit,
 }: paginationProps) {
-
     return (
         <>
-            {/* LIMIT SELECT */}
             <select
                 value={limit}
                 onChange={(e) => setLimit(Number(e.target.value))}
@@ -30,11 +28,7 @@ export default function Pagination({
                 <option value={20}>20</option>
                 <option value={25}>25</option>
             </select>
-
-            {/* PAGINATION */}
             <div className="flex justify-center items-center gap-2 mt-4">
-
-                {/* PREVIOUS */}
                 <button
                     onClick={() => setPage(page - 1)}
                     disabled={page === 1}
@@ -42,15 +36,11 @@ export default function Pagination({
                 >
                     Previous
                 </button>
-
-
                 <div className="flex gap-2">
                     {Array.from({ length: totalPages || 1 }, (_, i) => i + 1)
                         .filter((p) => {
                             const total = totalPages || 1;
-
                             if (total <= 3) return true;
-
                             return (
                                 p === 1 ||
                                 p === 2 ||
@@ -62,27 +52,24 @@ export default function Pagination({
                         })
                         .map((p, i, arr) => {
                             const prev = arr[i - 1];
-
                             return (
                                 <div key={i} className="flex items-center gap-2">
                                     {prev && p - prev > 1 && (
                                         <span className="px-2 text-gray-500">...</span>
                                     )}
-
                                     <button
                                         onClick={() => setPage(p)}
                                         className={`px-3 py-1 rounded ${page === p
-                                                ? "bg-blue-900 text-white"
-                                                : "bg-gray-200"
+                                            ? "bg-blue-900 text-white"
+                                            : "bg-gray-200"
                                             }`}
                                     >
                                         {p}
                                     </button>
                                 </div>
                             );
-                        })}                </div>
-
-                {/* NEXT */}
+                        })}
+                </div>
                 <button
                     onClick={() => setPage(page + 1)}
                     disabled={page === totalPages || totalPages === 0}

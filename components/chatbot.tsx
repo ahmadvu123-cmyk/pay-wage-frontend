@@ -1,5 +1,4 @@
 "use client";
-
 import { socket } from "@/config/socket";
 import { useState, useEffect } from "react";
 
@@ -9,7 +8,6 @@ export default function ChatBot() {
     const [isOpen, setIsOpen] = useState(false);
     useEffect(() => {
         socket.on('message', (data) => {
-            console.log('Message:', data);
             setMessages((prev) => [...prev, data]);
         })
         return () => {
@@ -30,17 +28,13 @@ export default function ChatBot() {
         setMessage("");
     }
     return (
-
         <>
-
             <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="fixed bottom-4 right-4 bg-blue-600 text-white px-4 py-3 rounded-full shadow-lg"
             >
                 💬 Live Chat
             </button>
-
-
             {isOpen && (
                 <div className="fixed bottom-20 right-4 w-80 bg-white shadow-xl border rounded-lg flex flex-col">
 
@@ -57,7 +51,6 @@ export default function ChatBot() {
                             </div>
                         ))}
                     </div>
-
                     <div className="flex border-t p-2">
                         <input
                             value={message}
@@ -81,5 +74,4 @@ export default function ChatBot() {
             )}
         </>
     );
-
 }

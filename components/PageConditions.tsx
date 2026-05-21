@@ -28,5 +28,4 @@ export default function PageCondition({ loading, workerLength, colspan }: PageCo
             </tr>
         )
     }
-
 }

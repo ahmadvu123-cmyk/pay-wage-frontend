@@ -7,10 +7,6 @@ import { getAttendances } from "@/services/attendance.service";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 
-
-
-
-
 export default function attendancesPage() {
     const [attendances, setAttendances] = useState([]);
     const [selectedAttendance, setSelectedAttendance] = useState(null);
@@ -42,19 +38,15 @@ export default function attendancesPage() {
             setLoading(false);
         }
     }
-
     useEffect(() => {
         fetchAttendances(page);
     }, [page, search, limit])
-
     const tableHeadings = [
         "ID",
         "Worker Name",
         "Worker ID",
         "Date"
     ]
-    console.log("attendances", attendances);
-
     return (
         <div className="p-4">
             <div className="overflow-x-auto overflow-y-auto h-[520px]">
@@ -68,10 +60,7 @@ export default function attendancesPage() {
                                 </th>
                             ))}
                             <th colSpan={tableHeadings.length} className="px-2 py-2">
-
                                 <div className="flex flex-nowrap items-center justify-end gap-3 w-full">
-
-                                    {/* FROM */}
                                     <div className="flex items-center gap-1">
                                         <label className="text-sm text-white">From</label>
                                         <input
@@ -81,8 +70,6 @@ export default function attendancesPage() {
                                             className="border p-1 rounded text-white bg-blue-900 [&::-webkit-calendar-picker-indicator]:invert"
                                         />
                                     </div>
-
-                                    {/* TO */}
                                     <div className="flex items-center gap-1">
                                         <label className="text-sm text-white">To</label>
                                         <input
@@ -92,21 +79,16 @@ export default function attendancesPage() {
                                             className="border p-1 rounded text-white bg-blue-900 [&::-webkit-calendar-picker-indicator]:invert"
                                         />
                                     </div>
-
-                                    {/* BUTTONS */}
                                     <button
                                         onClick={() => {
 
                                             setPage(1);
                                             fetchAttendances(1, startDate, endDate);
-
                                         }}
                                         className="bg-white text-blue-900 px-2 py-1 rounded"
                                     >
-
                                         Filter
                                     </button>
-
                                     <button
                                         onClick={() => {
 
@@ -126,9 +108,7 @@ export default function attendancesPage() {
                                         onChange={(e) => setSearch(e.target.value)}
                                         className="w-64 px-3 py-2 rounded-md text-white border border-gray-300 outline-none focus:ring-2 focus:ring-blue-500"
                                     />
-
                                 </div>
-
                             </th>
                         </tr>
                     </thead>
@@ -138,7 +118,6 @@ export default function attendancesPage() {
                             workerLength={attendances.length}
                             colspan={5}
                         />
-
                         {!loading &&
                             attendances.length > 0 &&
                             attendances.map((attendance: any, index: number) => (
@@ -147,19 +126,15 @@ export default function attendancesPage() {
                                     className="border-b hover:bg-gray-100 transition"
                                 >
                                     <td className="px-4 py-2 text-left">{index + 1}</td>
-
                                     <td className="px-4 py-2 text-left">
                                         {attendance.worker.name}
                                     </td>
-
                                     <td className="px-4 py-2 text-left">
                                         {attendance.worker_id}
                                     </td>
-
                                     <td className="px-4 py-2 text-left">
                                         {attendance.date.split("T")[0]}
                                     </td>
-
                                     <td className="px-4 py-2 text-right whitespace-nowrap">
                                         <button
                                             onClick={() => {
@@ -182,7 +157,6 @@ export default function attendancesPage() {
                 />
             </div>
             <div className="flex justify-end gap-4 mt-4">
-
                 <Pagination
                     page={page}
                     setPage={setPage}
@@ -190,9 +164,7 @@ export default function attendancesPage() {
                     limit={limit}
                     setLimit={setLimit}
                 />
-
             </div>
         </div>
     )
-
 }

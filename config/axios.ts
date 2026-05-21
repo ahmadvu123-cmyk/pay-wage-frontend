@@ -10,9 +10,9 @@ api.interceptors.request.use((config) => {
 })
 
 api.interceptors.response.use((response) => response,
-(error) => {
-    console.log('API Error', error);
-    return Promise.reject(error);
-})
+    (error) => {
+        console.log('API Error', error);
+        return Promise.reject(error);
+    })
 
 export default api

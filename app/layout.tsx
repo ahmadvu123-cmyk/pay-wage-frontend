@@ -12,7 +12,6 @@ export const metadata: Metadata = {
   description: "This is a pay wage app"
 };
 
-
 export default function RootLayout({
   children,
 }: Readonly<{

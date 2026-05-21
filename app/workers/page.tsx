@@ -7,10 +7,6 @@ import { getWorkers } from "@/services/worker.service";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 
-
-
-
-
 export default function WorkersPage() {
     // Workers Object States
     const [workers, setWorkers] = useState([]);
@@ -24,7 +20,6 @@ export default function WorkersPage() {
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);
     const [totalPages, setTotalPages] = useState(1);
-   
 
     async function fetchWorkers() {
         try {
@@ -39,7 +34,6 @@ export default function WorkersPage() {
             setLoading(false);
         }
     }
-
     useEffect(() => {
         fetchWorkers();
     }, [search, page, limit])
@@ -67,7 +61,6 @@ export default function WorkersPage() {
                             ))}
                             <th colSpan={tableHeadings.length} className="px-4 py-3">
                                 <div className="flex justify-end gap-2">
-
                                     <input
                                         type="text"
                                         placeholder="Search a worker..."
@@ -75,22 +68,16 @@ export default function WorkersPage() {
                                         onChange={(e) => setSearch(e.target.value)}
                                         className="w-64 px-3 py-2 rounded-md text-white border border-gray-300 outline-none focus:ring-2 focus:ring-blue-500"
                                     />
-
-
-
                                 </div>
                             </th>
-
                         </tr>
-
                     </thead>
                     <tbody className="bg-white">
                         <PageCondition
-                        loading={loading}
-                        workerLength={workers.length}
-                        colspan={5}
+                            loading={loading}
+                            workerLength={workers.length}
+                            colspan={5}
                         />
-
                         {!loading &&
                             workers.length > 0 &&
                             workers.map((worker: any, index: number) => (
@@ -101,19 +88,15 @@ export default function WorkersPage() {
                                     <td className="px-4 py-2 text-left">
                                         {(page - 1) * limit + index + 1}
                                     </td>
-
                                     <td className="px-4 py-2 text-left">
                                         {worker.name}
                                     </td>
-
                                     <td className="px-4 py-2 text-left">
                                         {worker.phone_num}
                                     </td>
-
                                     <td className="px-4 py-2 text-left">
                                         {worker.cnic}
                                     </td>
-
                                     <td className="px-4 py-2 text-right">
                                         <button
                                             onClick={() => {
@@ -128,14 +111,12 @@ export default function WorkersPage() {
                                 </tr>
                             ))}
                     </tbody>
-
                 </table>
                 <WorkerModal
                     isOpen={isOpen}
                     setIsOpen={setIsOpen}
                     selectedWorker={selectedWorker}
                 />
-
             </div>
             <div className="flex justify-end gap-4 mt-4">
                 <Pagination
@@ -147,7 +128,5 @@ export default function WorkersPage() {
                 />
             </div>
         </div>
-
-
     )
 }

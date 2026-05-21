@@ -6,21 +6,16 @@ type attendanceModalProps = {
 
 export default function attendanceModal({ isOpen, setIsOpen, selectedAttendance }: attendanceModalProps) {
     if (!isOpen || !selectedAttendance) return null;
-    console.log('Selected Attendance:', selectedAttendance);
-
     return (
         <div className="fixed inset-0 bg-black/50 flex justify-center items-center"
-        onClick={() => setIsOpen(false)}
+            onClick={() => setIsOpen(false)}
         >
-
             <div className="bg-white p-6 rounded-lg w-[400px]"
-            onClick={(e) => e.stopPropagation()}
+                onClick={(e) => e.stopPropagation()}
             >
-
                 <h2 className="text-xl font-bold mb-4">
                     Attendance Details
                 </h2>
-
                 <p><b>Worker Name:</b> {selectedAttendance.worker.name}</p>
                 <p><b>Worker ID:</b> {selectedAttendance.worker_id}</p>
                 <p>
@@ -45,17 +40,13 @@ export default function attendanceModal({ isOpen, setIsOpen, selectedAttendance 
                     <b>Attendance Status:</b>{" "}
                     {selectedAttendance.attendance_status ? "Present" : "Absent"}
                 </p>
-
                 <button
                     onClick={() => setIsOpen(false)}
                     className="mt-4 bg-blue-900 text-white px-4 py-2 rounded"
                 >
                     Close
                 </button>
-
             </div>
-
         </div>
-
     )
 }

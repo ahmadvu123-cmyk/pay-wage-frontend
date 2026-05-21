@@ -19,5 +19,5 @@ export const getWorkers = async (page: number, limit: number, search: string) =>
             status,
             message
         }
-    }    
+    }
 }

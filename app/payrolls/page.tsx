@@ -7,10 +7,6 @@ import { getPayrolls } from "@/services/payroll.service";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 
-
-
-
-
 export default function Payrolls() {
     const [payrolls, setPyarolls] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -21,13 +17,10 @@ export default function Payrolls() {
     const [limit, setLimit] = useState(10)
     const [totalPages, setTotalPages] = useState(1);
 
-
     async function fetchPayrolls() {
         try {
             setLoading(true);
             const response = await getPayrolls(page, limit, search);
-            console.log('Payroll Response:', response);
-
             setPyarolls(response.data.payrolls);
             setTotalPages(response.data.totalPages)
         } catch (error: any) {
@@ -62,7 +55,6 @@ export default function Payrolls() {
                                     {heading}
 
                                 </th>
-
                             ))}
                             <th colSpan={tableHeadings.length} className="px-4 py-3">
                                 <div className="flex justify-end gap-2">
@@ -85,7 +77,6 @@ export default function Payrolls() {
                                 colspan={7}
                             />
                         }
-
                         {!loading &&
                             payrolls.length > 0 &&
                             payrolls.map((payroll: any, index: number) => (
@@ -94,23 +85,18 @@ export default function Payrolls() {
                                     className="border-b hover:bg-gray-100 transition"
                                 >
                                     <td className="px-4 py-2 text-left">{index + 1}</td>
-
                                     <td className="px-4 py-2 text-left">
                                         {payroll.worker.name}
                                     </td>
-
                                     <td className="px-4 py-2 text-left">
                                         {payroll.worker_id}
                                     </td>
-
                                     <td className="px-4 py-2 text-left">
                                         {payroll.base_salary}
                                     </td>
-
                                     <td className="px-4 py-2 text-left">
                                         {payroll.net_salary}
                                     </td>
-
                                     <td className="px-4 py-2 text-right">
                                         <button
                                             onClick={() => {
@@ -125,7 +111,6 @@ export default function Payrolls() {
                                 </tr>
                             ))}
                     </tbody>
-
                 </table>
                 <PayrollModal
                     isOpen={isOpen}
@@ -133,7 +118,6 @@ export default function Payrolls() {
                     selectedPayroll={selectedPayroll}
                 />
             </div>
-
             <div className="flex justify-end gap-4 mt-4">
                 <Pagination
                     page={page}

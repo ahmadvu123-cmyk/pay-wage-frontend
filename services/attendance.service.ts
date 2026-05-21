@@ -6,21 +6,18 @@ export const getAttendances = async (start?: string, end?: string, page?: number
             page,
             limit
         }
-        if(search) params.search = search;
-        if(start){
+        if (search) params.search = search;
+        if (start) {
             params.start_date = new Date(new Date(start).setHours(new Date().getHours(), new Date().getMinutes(), new Date().getSeconds())).toISOString();
         }
-        if(end){
+        if (end) {
             params.end_date = new Date(new Date(end).setHours(new Date().getHours(), new Date().getMinutes(), new Date().getSeconds())).toISOString();
         }
-        
-        const response = await api.get(`/attendance`,
-            {params}
-        );
-        
-        return response.data;
-        
 
+        const response = await api.get(`/attendance`,
+            { params }
+        );
+        return response.data;
     } catch (error: any) {
         const message = error.response?.data?.message || 'Failed to fetch attendances';
         const status = error.response?.status || 500;
@@ -28,6 +25,5 @@ export const getAttendances = async (start?: string, end?: string, page?: number
             status,
             message
         }
-        
     }
 }
