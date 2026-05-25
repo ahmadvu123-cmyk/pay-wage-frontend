@@ -25,8 +25,8 @@ export default function WorkersPage() {
         try {
             setLoading(true);
             const response = await getWorkers(page, limit, search);
-            setWorkers(response.data.workers);
-            setTotalPages(response.data.totalPages)
+            setWorkers(response.workers);
+            setTotalPages(response.totalPages)
         } catch (error: any) {
             const message = "Failed to fetch workers. try again";
             toast.error(message);
