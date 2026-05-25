@@ -4,7 +4,7 @@ type attendanceModalProps = {
     selectedAttendance: any
 }
 
-export default function attendanceModal({ isOpen, setIsOpen, selectedAttendance }: attendanceModalProps) {
+export default function AttendanceModal({ isOpen, setIsOpen, selectedAttendance }: attendanceModalProps) {
     if (!isOpen || !selectedAttendance) return null;
     return (
         <div className="fixed inset-0 bg-black/50 flex justify-center items-center"

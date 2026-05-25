@@ -1,8 +1,8 @@
 "use client";
 
 import PageCondition from "@/components/PageConditions";
-import Pagination from "@/components/pagination";
-import WorkerModal from "@/components/workerModal";
+import Pagination from "@/components/Pagination";
+import WorkerModal from "@/components/WorkerModal";
 import { getWorkers } from "@/services/worker.service";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
@@ -28,7 +28,7 @@ export default function WorkersPage() {
             setWorkers(response.data.workers);
             setTotalPages(response.data.totalPages)
         } catch (error: any) {
-            const message = error?.response?.data?.message || error?.message || "Something went wrong while fetching workers";
+            const message = "Failed to fetch workers. try again";
             toast.error(message);
         } finally {
             setLoading(false);

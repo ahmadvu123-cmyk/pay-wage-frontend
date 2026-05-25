@@ -3,7 +3,7 @@ type payrollModalProps = {
     setIsOpen: (value: boolean) => void,
     selectedPayroll: any
 }
-export default function payrollModal({ isOpen, setIsOpen, selectedPayroll }: payrollModalProps) {
+export default function PayrollModal({ isOpen, setIsOpen, selectedPayroll }: payrollModalProps) {
     if (!isOpen || !selectedPayroll) return null;
     return (
         <div className="fixed inset-0 bg-black/50 flex justify-center items-center"

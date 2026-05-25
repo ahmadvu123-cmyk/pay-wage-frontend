@@ -1,0 +1,18 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # Baked into the client bundle at build time — run `docker compose build` after edits
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:3000}
+    container_name: pay_wage_frontend
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "${FRONTEND_PORT:-5000}:3000"
+    environment:
+      NODE_ENV: production
+      HOSTNAME: 0.0.0.0
+      PORT: 3000

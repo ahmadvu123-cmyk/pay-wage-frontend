@@ -4,7 +4,7 @@ type workerModalProps = {
     selectedWorker: any
 }
 
-export default function workerModal({ isOpen, setIsOpen, selectedWorker }: workerModalProps) {
+export default function WorkerModal({ isOpen, setIsOpen, selectedWorker }: workerModalProps) {
     if (!isOpen || !selectedWorker) return null;
     return (
         <div className="fixed inset-0 bg-black/50 flex justify-center items-center"

@@ -1,10 +1,10 @@
-import Sidebar from "@/components/Sidebar"
+import Sidebar from "../components/Sidebar"
 import "./globals.css";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 import type { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
-import ChatBot from "@/components/chatbot";
+import ChatBot from "../components/Chatbot";
 
 
 export const metadata: Metadata = {

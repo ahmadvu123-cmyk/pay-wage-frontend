@@ -1,8 +1,8 @@
 "use client";
 
 import PageCondition from "@/components/PageConditions";
-import Pagination from "@/components/pagination";
-import PayrollModal from "@/components/payrollModal";
+import Pagination from "@/components/Pagination";
+import PayrollModal from "@/components/PayrollModal";
 import { getPayrolls } from "@/services/payroll.service";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
@@ -24,7 +24,7 @@ export default function Payrolls() {
             setPyarolls(response.data.payrolls);
             setTotalPages(response.data.totalPages)
         } catch (error: any) {
-            const message = error?.response?.data?.message || error?.message || "Something went wrong while fetching payrolls";
+            const message = "Failed to fetch payrolls. try again";
             toast.error(message);
         } finally {
             setLoading(false);

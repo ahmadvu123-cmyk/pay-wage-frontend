@@ -1,8 +1,9 @@
 "use client";
 
-import AttendanceModal from "@/components/attendanceModal";
+
+import AttendanceModal from "@/components/AttendanceModal";
 import PageCondition from "@/components/PageConditions";
-import Pagination from "@/components/pagination";
+import Pagination from "@/components/Pagination";
 import { getAttendances } from "@/services/attendance.service";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
@@ -32,7 +33,7 @@ export default function attendancesPage() {
             setAttendances(response.data.attendances);
             setTotalPages(response.data.totalPages);
         } catch (error: any) {
-            const message = error?.response?.data?.message || error?.message || "Something went wrong while fetching attendances";
+            const message = "Failed to fetch attendances. try again";
             toast.error(message);
         } finally {
             setLoading(false);
