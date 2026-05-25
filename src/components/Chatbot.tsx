@@ -1,61 +1,87 @@
 "use client";
-import { getSocket } from "@/src/config/socket";
+import { connectSocket } from "@/src/config/socket";
 import { useState, useEffect } from "react";
 
 export default function ChatBot() {
-    const [message, setMessage] = useState("Hi");
-    const [messages, setMessages] = useState<{ user: string, text: string }[]>([]);
+    const [message, setMessage] = useState("");
+    const [messages, setMessages] = useState<{ user: string; text: string }[]>([]);
     const [isOpen, setIsOpen] = useState(false);
     const [connected, setConnected] = useState(false);
+    const [connectionError, setConnectionError] = useState<string | null>(null);
 
     useEffect(() => {
         if (!isOpen) return;
 
-        let socket: ReturnType<typeof getSocket>;
-        try {
-            socket = getSocket();
-        } catch {
-            return;
-        }
+        let active = true;
+        let removeListeners: (() => void) | undefined;
 
-        const onConnect = () => setConnected(true);
-        const onDisconnect = () => setConnected(false);
-        const onMessage = (data: { user: string; text: string }) => {
-            setMessages((prev) => [...prev, data]);
-        };
+        setConnectionError(null);
+        setConnected(false);
 
-        socket.on("connect", onConnect);
-        socket.on("disconnect", onDisconnect);
-        socket.on("message", onMessage);
+        connectSocket()
+            .then((s) => {
+                if (!active) return;
 
-        if (socket.connected) {
-            setConnected(true);
-        }
+                const onConnect = () => {
+                    setConnected(true);
+                    setConnectionError(null);
+                };
+                const onDisconnect = () => setConnected(false);
+                const onMessage = (data: { user: string; text: string }) => {
+                    setMessages((prev) => [...prev, data]);
+                };
+
+                s.on("connect", onConnect);
+                s.on("disconnect", onDisconnect);
+                s.on("message", onMessage);
+
+                if (s.connected) {
+                    onConnect();
+                }
+
+                removeListeners = () => {
+                    s.off("connect", onConnect);
+                    s.off("disconnect", onDisconnect);
+                    s.off("message", onMessage);
+                };
+            })
+            .catch((err: Error) => {
+                if (!active) return;
+                setConnectionError(
+                    err.message || "Could not connect to chat server."
+                );
+                setConnected(false);
+            });
 
         return () => {
-            socket.off("connect", onConnect);
-            socket.off("disconnect", onDisconnect);
-            socket.off("message", onMessage);
+            active = false;
+            removeListeners?.();
         };
     }, [isOpen]);
 
-    const sendMessage = () => {
+    const sendMessage = async () => {
         if (!message.trim() || !connected) return;
         try {
-            const socket = getSocket();
+            const socket = await connectSocket();
             socket.emit("message", message);
             setMessages((prev) => [
                 ...prev,
-                {
-                    user: "Me",
-                    text: message,
-                },
+                { user: "Me", text: message },
             ]);
             setMessage("");
-        } catch {
-            return;
+        } catch (err: unknown) {
+            const msg =
+                err instanceof Error ? err.message : "Failed to send message.";
+            setConnectionError(msg);
+            setConnected(false);
         }
     };
+
+    const statusLabel = connectionError
+        ? " (offline)"
+        : connected
+          ? ""
+          : " (connecting…)";
 
     return (
         <>
@@ -67,13 +93,23 @@ export default function ChatBot() {
             </button>
             {isOpen && (
                 <div className="fixed bottom-20 right-4 w-80 bg-white shadow-xl border rounded-lg flex flex-col">
-
                     <div className="bg-blue-600 text-white p-2 flex justify-between">
-                        <span>Live Chat{connected ? "" : " (connecting…)"}</span>
+                        <span>Live Chat{statusLabel}</span>
                         <button onClick={() => setIsOpen(false)}>✖</button>
                     </div>
 
+                    {connectionError && (
+                        <p className="px-3 py-2 text-sm text-red-600 bg-red-50 border-b">
+                            {connectionError}
+                        </p>
+                    )}
+
                     <div className="p-3 h-64 overflow-y-auto">
+                        {messages.length === 0 && connected && (
+                            <p className="text-gray-500 text-sm">
+                                Send a message to start the conversation.
+                            </p>
+                        )}
                         {messages.map((msg, index) => (
                             <div key={index} className="mb-1">
                                 <strong>{msg.user}: </strong>
