@@ -1,3 +1,5 @@
+"use client";
+
 type workerModalProps = {
     isOpen: Boolean,
     setIsOpen: (value: boolean) => void,

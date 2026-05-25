@@ -1,9 +1,9 @@
 "use client";
 
-import PageCondition from "@/components/PageConditions";
-import Pagination from "@/components/Pagination";
-import WorkerModal from "@/components/WorkerModal";
-import { getWorkers } from "@/services/worker.service";
+import PageCondition from "@/src/components/PageConditions";
+import Pagination from "@/src/components/Pagination";
+import WorkerModal from "@/src/components/WorkerModal";
+import { getWorkers } from "@/src/services/worker.service";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 

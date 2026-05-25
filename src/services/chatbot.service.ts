@@ -1,4 +1,4 @@
-import { socket } from "@/config/socket";
+import { socket } from "@/src/config/socket";
 
 export const getUserPromptResponse = async (prompt: string) => {
     try {

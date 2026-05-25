@@ -1,3 +1,5 @@
+"use client";
+
 type payrollModalProps = {
     isOpen: Boolean,
     setIsOpen: (value: boolean) => void,

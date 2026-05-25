@@ -1,4 +1,4 @@
-import api from "@/config/axios";
+import api from "@/src/config/axios";
 
 export const getWorkers = async (page: number, limit: number, search: string) => {
     try {

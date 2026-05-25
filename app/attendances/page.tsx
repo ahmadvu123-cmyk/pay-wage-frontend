@@ -1,10 +1,10 @@
 "use client";
 
 
-import AttendanceModal from "@/components/AttendanceModal";
-import PageCondition from "@/components/PageConditions";
-import Pagination from "@/components/Pagination";
-import { getAttendances } from "@/services/attendance.service";
+import AttendanceModal from "@/src/components/AttendanceModal";
+import PageCondition from "@/src/components/PageConditions";
+import Pagination from "@/src/components/Pagination";
+import { getAttendances } from "@/src/services/attendance.service";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 

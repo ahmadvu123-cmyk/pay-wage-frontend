@@ -1,10 +1,10 @@
-import Sidebar from "../components/Sidebar"
+import Sidebar from "../src/components/Sidebar"
 import "./globals.css";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
+import Footer from "../src/components/Footer";
+import Header from "../src/components/Header";
 import type { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
-import ChatBot from "@/components/Chatbot";
+import ChatBot from "@/src/components/Chatbot";
 
 
 

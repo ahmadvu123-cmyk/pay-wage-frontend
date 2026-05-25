@@ -1,5 +1,5 @@
 "use client";
-import { socket } from "@/config/socket";
+import { socket } from "@/src/config/socket";
 import { useState, useEffect } from "react";
 
 export default function ChatBot() {

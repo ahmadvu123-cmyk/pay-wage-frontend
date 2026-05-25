@@ -1,9 +1,9 @@
 "use client";
 
-import PageCondition from "@/components/PageConditions";
-import Pagination from "@/components/Pagination";
-import PayrollModal from "@/components/PayrollModal";
-import { getPayrolls } from "@/services/payroll.service";
+import PageCondition from "@/src/components/PageConditions";
+import Pagination from "@/src/components/Pagination";
+import PayrollModal from "@/src/components/PayrollModal";
+import { getPayrolls } from "@/src/services/payroll.service";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 

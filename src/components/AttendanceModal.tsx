@@ -1,3 +1,5 @@
+"use client";
+
 type attendanceModalProps = {
     isOpen: Boolean,
     setIsOpen: (value: boolean) => void,
