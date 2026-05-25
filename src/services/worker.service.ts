@@ -11,6 +11,7 @@ export const getWorkers = async (page: number, limit: number, search: string) =>
                 }
             }
         );
+        console.log(response.data.workers);
         return response.data;
     } catch (error: any) {
         const message = error.response?.data?.message || 'Failed to fetch workers';
