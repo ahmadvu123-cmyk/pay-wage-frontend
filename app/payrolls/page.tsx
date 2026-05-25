@@ -21,8 +21,8 @@ export default function Payrolls() {
         try {
             setLoading(true);
             const response = await getPayrolls(page, limit, search);
-            setPyarolls(response.payrolls);
-            setTotalPages(response.totalPages)
+            setPyarolls(response.data.payrols);
+            setTotalPages(response.data.totalPages)
         } catch (error: any) {
             const message = "Failed to fetch payrolls. try again";
             toast.error(message);

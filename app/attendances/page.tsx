@@ -30,8 +30,8 @@ export default function attendancesPage() {
                 limit,
                 search
             );
-            setAttendances(response.attendances);
-            setTotalPages(response.totalPages);
+            setAttendances(response.data.attendances);
+            setTotalPages(response.data.totalPages);
         } catch (error: any) {
             const message = "Failed to fetch attendances. try again";
             toast.error(message);
