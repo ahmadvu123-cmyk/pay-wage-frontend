@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 
 export default function Payrolls() {
-    const [payrolls, setPyarolls] = useState([]);
+    const [payrolls, setPayrolls] = useState([]);
     const [loading, setLoading] = useState(true);
     const [selectedPayroll, setSelectedPayroll] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +21,7 @@ export default function Payrolls() {
         try {
             setLoading(true);
             const response = await getPayrolls(page, limit, search);
-            setPyarolls(response.data.payrols);
+            setPayrolls(response.data.payrolls);
             setTotalPages(response.data.totalPages)
         } catch (error: any) {
             const message = "Failed to fetch payrolls. try again";

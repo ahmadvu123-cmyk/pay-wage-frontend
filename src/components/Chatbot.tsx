@@ -1,32 +1,62 @@
 "use client";
-import { socket } from "@/src/config/socket";
+import { getSocket } from "@/src/config/socket";
 import { useState, useEffect } from "react";
 
 export default function ChatBot() {
     const [message, setMessage] = useState("Hi");
     const [messages, setMessages] = useState<{ user: string, text: string }[]>([]);
     const [isOpen, setIsOpen] = useState(false);
+    const [connected, setConnected] = useState(false);
+
     useEffect(() => {
-        socket.on('message', (data) => {
-            setMessages((prev) => [...prev, data]);
-        })
-        return () => {
-            socket.off('message')
+        if (!isOpen) return;
+
+        let socket: ReturnType<typeof getSocket>;
+        try {
+            socket = getSocket();
+        } catch {
+            return;
         }
-    }, [])
+
+        const onConnect = () => setConnected(true);
+        const onDisconnect = () => setConnected(false);
+        const onMessage = (data: { user: string; text: string }) => {
+            setMessages((prev) => [...prev, data]);
+        };
+
+        socket.on("connect", onConnect);
+        socket.on("disconnect", onDisconnect);
+        socket.on("message", onMessage);
+
+        if (socket.connected) {
+            setConnected(true);
+        }
+
+        return () => {
+            socket.off("connect", onConnect);
+            socket.off("disconnect", onDisconnect);
+            socket.off("message", onMessage);
+        };
+    }, [isOpen]);
 
     const sendMessage = () => {
-        if (!message.trim()) return;
-        socket.emit('message', message);
-        setMessages((prev) => [
-            ...prev,
-            {
-                user: "Me",
-                text: message
-            },
-        ]);
-        setMessage("");
-    }
+        if (!message.trim() || !connected) return;
+        try {
+            const socket = getSocket();
+            socket.emit("message", message);
+            setMessages((prev) => [
+                ...prev,
+                {
+                    user: "Me",
+                    text: message,
+                },
+            ]);
+            setMessage("");
+        } catch {
+            return;
+        }
+    };
+
     return (
         <>
             <button
@@ -39,7 +69,7 @@ export default function ChatBot() {
                 <div className="fixed bottom-20 right-4 w-80 bg-white shadow-xl border rounded-lg flex flex-col">
 
                     <div className="bg-blue-600 text-white p-2 flex justify-between">
-                        <span>Live Chat</span>
+                        <span>Live Chat{connected ? "" : " (connecting…)"}</span>
                         <button onClick={() => setIsOpen(false)}>✖</button>
                     </div>
 
@@ -62,10 +92,12 @@ export default function ChatBot() {
                             }}
                             className="flex-1 border p-1"
                             placeholder="Type message..."
+                            disabled={!connected}
                         />
                         <button
                             onClick={sendMessage}
-                            className="bg-blue-600 text-white px-3 ml-2"
+                            disabled={!connected}
+                            className="bg-blue-600 text-white px-3 ml-2 disabled:opacity-50"
                         >
                             Send
                         </button>

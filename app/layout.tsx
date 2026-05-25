@@ -5,6 +5,7 @@ import Header from "../src/components/Header";
 import type { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
 import ChatBot from "@/src/components/Chatbot";
+import RuntimeConfig from "@/src/components/RuntimeConfig";
 
 
 
@@ -23,6 +24,7 @@ export default function RootLayout({
       lang="en"
     >
       <body className="min-h-full flex flex-col">
+      <RuntimeConfig />
       <Sidebar />
       <Toaster position="top-right" />
         <div>

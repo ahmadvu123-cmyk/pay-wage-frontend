@@ -16,3 +16,4 @@ services:
       NODE_ENV: production
       HOSTNAME: 0.0.0.0
       PORT: 3000
+      API_URL: ${API_URL:-http://host.docker.internal:3001}

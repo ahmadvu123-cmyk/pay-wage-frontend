@@ -1,8 +1,8 @@
-import { socket } from "@/src/config/socket";
+import { getSocket } from "@/src/config/socket";
 
 export const getUserPromptResponse = async (prompt: string) => {
     try {
-        socket.emit('message', prompt);
+        getSocket().emit('message', prompt);
     } catch (error: any) {
         const message = 'Failed to fetch chatbot response';
         const status = error.response?.status || 500;
