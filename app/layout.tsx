@@ -4,7 +4,8 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import type { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
-import ChatBot from "../components/Chatbot";
+import ChatBot from "@/components/Chatbot";
+
 
 
 export const metadata: Metadata = {
